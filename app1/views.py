@@ -10,8 +10,8 @@ def LoginPage(request):
         pass1=request.POST.get('pass')
         user=authenticate(request,username=username,password=pass1)
         if user is not None:
-            login(request,user)
-            return redirect('homepage')
+           login(request,user)
+           return redirect('homepage')
         else:
             return HttpResponse('Go back username or password is not correct')
 
@@ -32,6 +32,7 @@ def SignupPage(request):
            return redirect('login')
     
     return render(request, 'signup.html')
+
 @login_required(login_url='login')
 def HomePage(request):
     return render(request, 'homepage.html')
@@ -39,3 +40,18 @@ def HomePage(request):
 def LogoutPage(request):
     logout(request)
     return redirect('login')
+
+def ChangePassword(request):
+    if request.method=='POST':
+        currentpassword = request.POST.get('currentpassword')
+        newpassword = request.POST.get('newpassword1')
+        
+        user = User.objects.get(id=request.user.id)
+        check = user.check_password(currentpassword)
+        print(check)
+        if check==True:
+            user.set_password(newpassword)
+            user.save()
+        else:
+            return HttpResponse("Current Password is Incorrect")
+    return render(request, 'changepassword.html')

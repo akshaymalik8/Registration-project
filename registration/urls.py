@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from app1 import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.SignupPage, name="signup"),
     path('login/', views.LoginPage, name="login"),
     path('homepage/', views.HomePage, name="homepage"),
     path('logout/', views.LogoutPage, name='logout'),
+    path('changepassword/', views.ChangePassword, name='changepass')
 ]

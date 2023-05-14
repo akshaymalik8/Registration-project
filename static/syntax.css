@@ -41,3 +41,13 @@ h4 a {
 h4 a:hover {
     color: black;
 }
+/* change password */
+#cpass a{
+    text-decoration: none;
+    color: blanchedalmond;
+}
+
+div.container3 {
+    padding: 20px;
+}
+
